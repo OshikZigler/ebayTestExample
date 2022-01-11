@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Environment>
+
+    <!-- Timeout -->
+    <ImplicitWait>15</ImplicitWait>
+    <ExplicitWait>15</ExplicitWait>
+
+    <!-- Login info -->
+
+    <!-- Web config -->
+    <URL>https://www.ebay.com</URL>
+
+
+    <!-- Queries -->
+    <Watch>watch</Watch>
+
+
+
+
+</Environment>

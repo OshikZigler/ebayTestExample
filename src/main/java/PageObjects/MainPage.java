@@ -17,7 +17,7 @@ public class MainPage extends Base
     public WebElement searchButton;
 
     @FindBy (how = How.CLASS_NAME , using = "s-item__price" )
-    public List <WebElement> allItemsPrice = driver.findElements(By.className("s-item__price"));
+    public List <WebElement> allItemsPrice;
 
 
 

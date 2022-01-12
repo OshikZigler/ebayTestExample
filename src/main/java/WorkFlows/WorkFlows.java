@@ -25,14 +25,26 @@ public class WorkFlows extends CommonOps
 
         for (WebElement price : mainPage.allItemsPrice)
         {
-            String priceString = price.getText();
-            System.out.println(priceString);
+            String priceString = price.getText().replace("ILS " , "").replace("," , "");
+            if (priceString.contains("to"))
+            {
+
+            }
+            else
+            {
+                double priceDouble = Double.parseDouble(priceString);
+                System.out.println(priceDouble);
+            }
         }
-        //TODO
+    }
+
+
+
+
+    //TODO
          /*PSEUDOCODE
 
-        - Trim "ILS " from all prices string
-        - Parse all strings to double
+
         - Insert all double prices into an Array (prices)
 
         - Find max value with:
@@ -54,8 +66,4 @@ public class WorkFlows extends CommonOps
             }
         }
         System.out.println("Cheapest watch costs :" + min);*/
-
-
-
-    }
 }

@@ -3,45 +3,52 @@ package WorkFlows;
 
 import Extensions.UIActions;
 import Utils.CommonOps;
+
 import com.sun.tools.javac.comp.Todo;
+
 import org.openqa.selenium.WebElement;
 
 import java.util.ArrayList;
+import java.util.List;
 
-public class WorkFlows extends CommonOps
-{
-    public static void searchForItem (String item)
-    {
-        UIActions.click(mainPage.searchField);
-        UIActions.enterText(mainPage.searchField , item);
-        UIActions.click(mainPage.searchButton);
-    }
+public class WorkFlows
+		extends CommonOps {
 
-    public static void getItemPrices ()
-    {
-        /*ArrayList allItemsPrices = new ArrayList();
-        allItemsPrices.addAll(mainPage.allItemsPrice);
-        System.out.println(allItemsPrices);*/
+	public static void searchForItem(String item) {
+		UIActions.click(mainPage.searchField);
+		UIActions.enterText(mainPage.searchField, item);
+		UIActions.click(mainPage.searchButton);
+	}
 
-        for (WebElement price : mainPage.allItemsPrice)
-        {
-            String priceString = price.getText().replace("ILS " , "").replace("," , "");
-            if (priceString.contains("to"))
-            {
+	public static void getItemPrices() {
+		List<WebElement> allItemsPrices = new ArrayList<>();
+		allItemsPrices.addAll(mainPage.allItemsPrice);
 
-            }
-            else
-            {
-                double priceDouble = Double.parseDouble(priceString);
-                System.out.println(priceDouble);
-            }
-        }
-    }
+		double maxPrice = 0;
+
+		for (WebElement price : allItemsPrices) {
+			String priceString = price.getText()
+			                          .replace("ILS ", "")
+			                          .replace(",", "");
+
+			if (!priceString.contains("to") || priceString.isEmpty()) {
+				try {
+					Double priceToDouble = Double.parseDouble(priceString);
+					System.out.println(priceToDouble);
+
+					if (priceToDouble > maxPrice) {
+						maxPrice = priceToDouble;
+					}
+				} catch (NumberFormatException e) {
+					System.err.println("Error converting price to double for: " + priceString);
+				}
+			}
+		}
+		System.out.println("Most expensive watch price is " + maxPrice);
+	}
 
 
-
-
-    //TODO
+	//TODO
          /*PSEUDOCODE
 
 

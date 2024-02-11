@@ -1,50 +1,56 @@
 package Utils;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
+
 import java.util.concurrent.TimeUnit;
 
-public class CommonOps extends Base
-{
+public class CommonOps
+		extends Base {
 
-    @BeforeClass
-    public void startSession()
-    {
-       initBrowser();
-       PageManager.initPages();
-    }
+	private static final String URL = "https://ebay.com/";
 
-    @AfterClass
-    public void endSession()
-    {
-        driver.quit();
-    }
+	@BeforeClass
+	public void startSession() {
+		initBrowser();
+		PageManager.initPages();
+	}
 
-
-    //initializing ChromeDriver
-    public static WebDriver initChromeDriver()
-    {
-        WebDriverManager.chromedriver().setup();
-        WebDriver driver = new ChromeDriver();
-        return driver;
-    }
-
-    //initializing Browser
-    public static void initBrowser()
-    {
-        driver = initChromeDriver();
-        driver.manage().window().maximize();
-        driver.get("https://www.ebay.com");
-        //implicitly wait
-        driver.manage().timeouts().implicitlyWait(Long.parseLong("3"), TimeUnit.SECONDS);
-        //explicitly wait
-        explicitWait = new WebDriverWait(driver , Long.parseLong("3"));
+	@AfterClass
+	public void endSession() {
+		driver.quit();
+	}
 
 
-    }
+	//initializing ChromeDriver
+	public static WebDriver initChromeDriver() {
+		WebDriverManager.chromedriver()
+		                .setup();
+		WebDriver driver = new ChromeDriver();
+		return driver;
+	}
+
+	//initializing Browser
+	public static void initBrowser() {
+		driver = initChromeDriver();
+		driver.manage()
+		      .window()
+		      .maximize();
+		driver.get(URL);
+
+		//implicitly wait
+		driver.manage()
+		      .timeouts()
+		      .implicitlyWait(Long.parseLong("3"), TimeUnit.SECONDS);
+		//explicitly wait
+		explicitWait = new WebDriverWait(driver, Long.parseLong("3"));
+
+
+	}
 
 }
